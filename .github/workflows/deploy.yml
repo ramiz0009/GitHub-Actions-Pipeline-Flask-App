@@ -1,0 +1,66 @@
+name: Deploy to EC2 (Flask App CI/CD)
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v5
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Run Tests
+      run: |
+        if ls tests >/dev/null 2>&1; then
+          pytest -q
+        else
+          echo "No tests folder found, skipping pytest."
+        fi
+
+    - name: Copy code to EC2
+      if: success()
+      uses: appleboy/scp-action@v1
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        port: 22
+        source: ./
+        target: ~/flask_app_temp
+
+    - name: Deploy to nginx folder
+      if: success()
+      uses: appleboy/ssh-action@v1
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USERNAME }}
+        key: ${{ secrets.EC2_SSH_KEY }}
+        port: 22
+        script: |
+          echo "Branch: ${{ github.ref_name }}"
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            TARGET="/var/www/html"
+          else
+            TARGET="/var/www/html/staging"
+          fi
+          echo "Deploying to $TARGET"
+          sudo mkdir -p $TARGET
+          sudo rm -rf $TARGET/*
+          sudo cp -r ~/flask_app_temp/* $TARGET/
+          sudo systemctl restart nginx
+          echo "✅ Deployment complete for branch: ${{ github.ref_name }}"
