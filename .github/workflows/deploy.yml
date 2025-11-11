@@ -26,10 +26,10 @@ jobs:
 
     - name: Run Tests
       run: |
-        if ls tests >/dev/null 2>&1; then
+        if [ -d tests ] || ls test_*.py >/dev/null 2>&1; then
           pytest -q
         else
-          echo "No tests folder found, skipping pytest."
+          echo "No tests found; skipping pytest"
         fi
 
     - name: Copy code to EC2
@@ -43,7 +43,7 @@ jobs:
         source: ./
         target: ~/flask_app_temp
 
-    - name: Deploy to nginx folder
+    - name: Deploy to correct folder and set APP_ENV
       if: success()
       uses: appleboy/ssh-action@v1
       with:
@@ -52,7 +52,8 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         port: 22
         script: |
-          echo "Branch: ${{ github.ref_name }}"
+          echo "GitHub ref name: ${{ github.ref_name }}"
+          # decide target and APP_ENV based on branch
           if [ "${{ github.ref_name }}" = "main" ]; then
             TARGET="/var/www/html"
             APP_ENV="production"
@@ -60,10 +61,17 @@ jobs:
             TARGET="/var/www/html/staging"
             APP_ENV="staging"
           fi
-          echo "Deploying to $TARGET"
-          sudo mkdir -p $TARGET
-          sudo rm -rf $TARGET/*
-          sudo cp -r ~/flask_app_temp/* $TARGET/
-          echo "APP_ENV=$APP_ENV" | sudo tee $TARGET/.env
+
+          echo "Deploy target: $TARGET"
+          sudo mkdir -p "$TARGET"
+          # remove old files (be careful if you have anything else in /var/www/html)
+          sudo rm -rf "${TARGET:?}"/*
+          # copy uploaded files into target
+          sudo cp -r ~/flask_app_temp/* "$TARGET/"
+          # set permissions so nginx (www-data) can read (optional)
+          sudo chown -R www-data:www-data "$TARGET"
+          # write a minimal .env file with APP_ENV so your app can detect env
+          echo "APP_ENV=$APP_ENV" | sudo tee "$TARGET/.env" > /dev/null
+          # restart nginx to pick up changes
           sudo systemctl restart nginx
-          echo "✅ Deployment complete for branch: ${{ github.ref_name }}"
+          echo "Deployment finished for branch: ${{ github.ref_name }} (APP_ENV=$APP_ENV)"
