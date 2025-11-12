@@ -15,7 +15,6 @@ pipeline {
     skipStagesAfterUnstable()
     timestamps()
     buildDiscarder(logRotator(numToKeepStr: '30')) // keep last 30 builds
-    ansiColor('xterm')
   }
 
   stages {
