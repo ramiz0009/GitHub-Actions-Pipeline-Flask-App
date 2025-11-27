@@ -39,6 +39,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/key.pem ubuntu@${{ secrets.STAGING_EC2_HOST }} '
             sudo unzip -o /home/ubuntu/app.zip -d /home/ubuntu/app
+            sudo chown -R ubuntu:ubuntu /home/ubuntu/app
             sudo systemctl restart flaskapp
           '
 
@@ -73,5 +74,6 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/key.pem ubuntu@${{ secrets.PROD_EC2_HOST }} '
             sudo unzip -o /home/ubuntu/app.zip -d /home/ubuntu/app
+            sudo chown -R ubuntu:ubuntu /home/ubuntu/app
             sudo systemctl restart flaskapp
           '
