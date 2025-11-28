@@ -1,4 +1,4 @@
-<img width="1100" height="346" alt="image" src="https://github.com/user-attachments/assets/1afd0c73-ca3e-4b7c-92d8-9189f9422bb6" /># Flask App CI/CD Pipeline with GitHub Actions
+# Flask App CI/CD Pipeline with GitHub Actions
 
 A complete CI/CD workflow implementation using GitHub Actions for a Python Flask application with automated deployment to staging and production environments on AWS EC2.
 
@@ -12,6 +12,8 @@ create staging branch
 
 ```bash
 git clone https://github.com/ramiz0009/GitHub-Actions-Pipeline-Flask-App.git
+<img width="1100" height="346" alt="image" src="https://github.com/user-attachments/assets/1afd0c73-ca3e-4b7c-92d8-9189f9422bb6" />
+
 cd flask_Practice
 - <img width="1000" height="370" alt="image" src="https://github.com/user-attachments/assets/de86913a-9fcd-400d-b91d-24aa8b299275" />
 
@@ -37,7 +39,7 @@ git push origin staging
 
 ### EC2 Configuration
 
-#### Step 5: Launch EC2 Instances
+#### Launch EC2 Instances
 
 Launch 2 EC2 instances (Ubuntu):
 
@@ -71,7 +73,7 @@ Repeat this configuration on both staging and production servers.
 
 ### MongoDB Setup
 
-#### Step 7: Create MongoDB Cluster
+#### Create MongoDB Cluster
 
 1. Go to [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
 2. Create a new cluster
@@ -82,7 +84,7 @@ Repeat this configuration on both staging and production servers.
 
 ### GitHub Secrets Configuration
 
-#### Step 8: Add Repository Secrets
+#### Add Repository Secrets
 
 Navigate to your GitHub repository: **Settings > Secrets and variables > Actions > New repository secret**
 
@@ -142,17 +144,17 @@ The workflow file (`main.yml`) should automate the following steps:
 
 ### Staging Deployment
 
-#### Step 9: Switch to Staging Branch
+####  Switch to Staging Branch
 
 ```bash
 git switch staging
 ```
 
-#### Step 10: Make Code Changes
+####  Make Code Changes
 
 Edit your code in Visual Studio Code or your preferred editor.
 
-#### Step 11: Configure Personal Access Token (PAT)
+#### Configure Personal Access Token (PAT)
 
 Generate a Personal Access Token for secure Git operations:
 
@@ -167,7 +169,7 @@ Configure in your local repository:
 git remote set-url origin https://<your-PAT>@github.com/<your-username>/flask_Practice.git
 ```
 
-#### Step 12: Commit and Push Changes
+####  Commit and Push Changes
 
 ```bash
 git checkout staging
@@ -176,7 +178,7 @@ git commit -m "Staging Initial build"
 git push origin staging
 ```
 
-#### Step 13: Monitor Workflow Execution
+#### Monitor Workflow Execution
 
 1. Go to your GitHub repository
 2. Navigate to the **Actions** tab
@@ -185,7 +187,7 @@ git push origin staging
    - <img width="1391" height="801" alt="image" src="https://github.com/user-attachments/assets/ca059900-4550-45b7-b8dc-b7543c275f8a" />
 
 
-#### Step 14: Verify Staging Artifacts
+####  Verify Staging Artifacts
 
 SSH into the staging server:
 
@@ -197,7 +199,7 @@ ls -la /home/ubuntu/app/
 ```
 - <img width="651" height="301" alt="image" src="https://github.com/user-attachments/assets/86b4eea6-6b4b-4102-aea2-4590b6fa9720" />
 
-#### Step 15: Test Staging Application
+####  Test Staging Application
 
 Access the application in your browser:
 
@@ -255,6 +257,7 @@ Verify:
 - All features are functional
 
 - <img width="1492" height="502" alt="image" src="https://github.com/user-attachments/assets/92fce48b-a3c0-4195-89a7-e977d996c41e" />
+
 
 
 
