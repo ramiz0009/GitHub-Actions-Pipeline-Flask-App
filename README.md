@@ -4,7 +4,7 @@ A complete CI/CD workflow implementation using GitHub Actions for a Python Flask
 
 # Fork the repo into your github
 
-### create staging branch
+#### Create staging branch
 
 -<img width="1172" height="627" alt="image" src="https://github.com/user-attachments/assets/79b670c7-9412-4deb-8a07-c71db2757b0a" />
 
@@ -248,6 +248,7 @@ Verify:
 - All features are functional
 
 - <img width="1492" height="502" alt="image" src="https://github.com/user-attachments/assets/92fce48b-a3c0-4195-89a7-e977d996c41e" />
+
 
 
 
