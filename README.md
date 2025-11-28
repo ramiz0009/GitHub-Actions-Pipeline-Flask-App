@@ -3,39 +3,29 @@
 A complete CI/CD workflow implementation using GitHub Actions for a Python Flask application with automated deployment to staging and production environments on AWS EC2.
 
 # Fork the repo into your github
-create staging branch
+
+### create staging branch
+
 -<img width="1172" height="627" alt="image" src="https://github.com/user-attachments/assets/79b670c7-9412-4deb-8a07-c71db2757b0a" />
 
-
-```bash
 ####  Clone Repository Locally
 
-```bash
 git clone https://github.com/ramiz0009/GitHub-Actions-Pipeline-Flask-App.git
+
 <img width="1100" height="346" alt="image" src="https://github.com/user-attachments/assets/1afd0c73-ca3e-4b7c-92d8-9189f9422bb6" />
 
 cd flask_Practice
+
 - <img width="1000" height="370" alt="image" src="https://github.com/user-attachments/assets/de86913a-9fcd-400d-b91d-24aa8b299275" />
 
 # Create workflow directory
 mkdir -p .github/workflows
 
 # Add main.yml workflow file to .github/workflows/
+
 - <img width="1100" height="346" alt="image" src="https://github.com/user-attachments/assets/70433f45-f2f9-4b31-be2d-d0a5a7dfce65" />
 
 # Create `main.yml` file in `.github/workflows/` with the CI/CD pipeline configuration. Ensure the workflow file is committed to both `main` and `staging` branches.
-
-**Create Staging Branch**
-
-In your forked repository, create a new branch called `staging`:
-
-```bash
-git checkout -b staging
-git push origin staging
-```
-
-
-```
 
 ### EC2 Configuration
 
@@ -257,6 +247,7 @@ Verify:
 - All features are functional
 
 - <img width="1492" height="502" alt="image" src="https://github.com/user-attachments/assets/92fce48b-a3c0-4195-89a7-e977d996c41e" />
+
 
 
 
