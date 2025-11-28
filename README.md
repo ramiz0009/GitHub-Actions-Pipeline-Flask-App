@@ -14,7 +14,8 @@ git clone https://github.com/ramiz0009/GitHub-Actions-Pipeline-Flask-App.git
 
 <img width="1100" height="346" alt="image" src="https://github.com/user-attachments/assets/1afd0c73-ca3e-4b7c-92d8-9189f9422bb6" />
 
-cd flask_Practice
+
+### cd GitHub-Actions-Pipeline-Flask-App
 
 - <img width="1000" height="370" alt="image" src="https://github.com/user-attachments/assets/de86913a-9fcd-400d-b91d-24aa8b299275" />
 
@@ -247,6 +248,7 @@ Verify:
 - All features are functional
 
 - <img width="1492" height="502" alt="image" src="https://github.com/user-attachments/assets/92fce48b-a3c0-4195-89a7-e977d996c41e" />
+
 
 
 
